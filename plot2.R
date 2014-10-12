@@ -66,9 +66,6 @@ plot2 <- function() {
        ## plot histogram & save a copy to plot2.png
        ##  
   
-          ##hist(EData$Global_active_power, col = "red", 
-          ##     main = "", xlab = "Global Active Power (kilowatts)")
-    
           plot(EData$DateTime, EData$Global_active_power, type = "l", xlab = "", 
                ylab = "Global Active Power (kilowatts)")
   

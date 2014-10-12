@@ -4,14 +4,14 @@
 ## 
 ## README.md has details of the data & instructions for this project
 ## 
-## plot3.R should be located together with the necessary data file
+## plot4.R should be located together with the necessary data file
 ##         household_power_consumption.txt
-##         Open this file (plot3.R) in R or RStudio & 
-##         source("plot3.R")
-##         run the function plot3()
-##         to create graph plot3.png
+##         Open this file (plot4.R) in R or RStudio & 
+##         source("plot4.R")
+##         run the function plot4()
+##         to create graph plot4.png
 
-plot3 <- function() {
+plot4 <- function() {
   
   ##
   ## make sure all necessary graphics libraries are open
@@ -63,19 +63,45 @@ plot3 <- function() {
           EData$Date <- as.Date(EData$Date)
           
        ##
-       ## plot line graph & save a copy to plot3.png
+       ## plot 4 graphs & save a copy to plot4.png
        ##  
-         
-          plot(EData$DateTime, EData$Sub_metering_1, type = "l", xlab = "", 
-               ylab = "Energy sub metering")
+  
+  
+          par(mfrow=c(2,2))  
+          
+          ## top left graph
+          ##
+          plot(EData$DateTime, EData$Global_active_power, type = "l", xlab = "", 
+               ylab = "Global Active Power")
+  
+  
+          ## top right graph
+          ##
+          plot(EData$DateTime, EData$Voltage, type = "l", 
+               xlab = "datetime", 
+               ylab = "Voltage")
+  
+  
+          ## bottom left graph
+          ##  
+          plot(EData$DateTime, EData$Sub_metering_1, type = "l", 
+               xlab = "", ylab = "Energy sub metering")
           lines(EData$DateTime, EData$Sub_metering_2, col = "red")
           lines(EData$DateTime, EData$Sub_metering_3, col = "blue")
   
           legtxt <- c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
           legend( 'topright', legend = legtxt, lty=1, 
-                  col=c('black', 'red', 'blue'), bty='o', cex=.75)
+                   col=c('black', 'red', 'blue'), bty='n', cex= .5)
+
+      
+          ## bottom right graph
+          ##
+          plot(EData$DateTime, EData$Global_reactive_power, type = "l", 
+               xlab = "datetime", 
+               ylab = "Global_reActive_power")
   
-          dev.copy(png, file = "plot3.png") ## Copy histogram to a PNG file
+          
+          dev.copy(png, file = "plot4.png") ## Copy histogram to a PNG file
           dev.off()                         ## Close the PNG device
 
   return()
